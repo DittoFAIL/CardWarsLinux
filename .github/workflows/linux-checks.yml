@@ -1,0 +1,25 @@
+name: Linux portability checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  portability:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Check asset paths and portable sources
+        run: python3 scripts/check-linux.py
+      - name: Check launcher syntax and packaging behavior
+        run: |
+          bash -n scripts/build-linux.sh scripts/linux/run.sh
+          python3 -m unittest discover -s scripts -p 'test_*.py' -v
+      # These checks do not compile Unity or establish gameplay compatibility.

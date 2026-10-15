@@ -591,7 +591,7 @@ public class UICamera : MonoBehaviour
 			useKeyboard = false;
 			useController = true;
 		}
-		else if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor)
+		else if (Application.isEditor)
 		{
 			mIsEditor = true;
 		}
