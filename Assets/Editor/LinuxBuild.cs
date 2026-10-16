@@ -114,7 +114,7 @@ public static class LinuxBuild
     {
         if (Application.unityVersion != UnityVersion)
             throw new InvalidOperationException("This project requires Unity " + UnityVersion + "; running " + Application.unityVersion + ".");
-        if (!BuildPipeline.IsBuildTargetSupported(BuildTargetGroup.Standalone, Target))
-            throw new InvalidOperationException("Install Linux Build Support for Unity " + UnityVersion + ".");
+        // IsBuildTargetSupported is internal in Unity 2017.4. Missing platform
+        // support is reported by SwitchActiveBuildTarget or BuildPlayer instead.
     }
 }
